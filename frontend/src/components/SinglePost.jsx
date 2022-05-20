@@ -10,7 +10,7 @@ export default function SinglePost({ title, text, userName, index }) {
             <h2 className='pt-6 px-6'>{text}</h2>
         </div>
         <div className='flex justify-end items-center w-full h-[50px] bg-sky-300 text-1xl font-bold rounded-b-xl'>
-        <h3 className='pr-5'>{userName}</h3>
+            <h3 className='pr-5'>{userName}</h3>
         </div>
     </div>
   )
