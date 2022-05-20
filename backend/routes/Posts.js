@@ -21,6 +21,6 @@ router.get('/:id', async (req, res) => {
     if(singlePost) {
         return res.status(200).json(singlePost);
     }
-})
+});
 
 module.exports = router;
