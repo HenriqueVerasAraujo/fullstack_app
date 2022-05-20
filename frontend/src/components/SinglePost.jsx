@@ -1,8 +1,15 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
-export default function SinglePost({ title, text, userName, index }) {
+export default function SinglePost({ title, text, userName, index, id }) {
+  let navigate = useNavigate();
+
+  const redirectToPost = () => {
+    navigate(`/post/${id}`)
+  }
+
   return (
-    <div key={index} className='w-[400px] h-[400px] bg-zinc-100 border-2 border-blue-300  mb-10 rounded-xl flex flex-col justify-between'>
+    <div onClick={redirectToPost} key={index} className='hover:cursor-pointer w-[400px] h-[400px] bg-zinc-100 border-2 border-blue-300  mb-10 rounded-xl flex flex-col justify-between'>
         <div className='flex justify-center items-center w-full h-[50px] bg-sky-300 text-2xl font-bold rounded-t-xl'>
             <h1 className='text-black'>{title}</h1>
         </div>
