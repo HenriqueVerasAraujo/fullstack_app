@@ -1,10 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
  
 export default function CreatePost() {
-
+    let navigate = useNavigate();
     const initialValues = {
         title:'',
         postText:'',
@@ -12,7 +13,8 @@ export default function CreatePost() {
     }
     const onSubmit = async (data) => {
         await axios.post('http://localhost:3001/posts', data)
-        console.log('deu certo');
+        navigate('/');
+
     }
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('You must create a title for your post'),
