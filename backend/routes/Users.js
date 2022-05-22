@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Users } = require('../models');
 const bcrypt = require('bcrypt');
+const { sign } = require('jsonwebtoken');
 
 router.post('/', async(req, res) => {
     const { password, userName } = req.body;
@@ -26,7 +27,8 @@ router.post('/login', async(req, res) => {
     if (!verifyPassword) {
         return res.json({error: "Senha invalida"});
     }
-    return res.status(200).json({message: "You are logged in"});
+    const token = sign({userName: user.userName, id: user.id}, 'secretkey');
+    return res.status(200).json({message: "You are logged in", token,});
 });
 
 // router.get('/:postId', async (req, res) => {
