@@ -9,7 +9,6 @@ export default function CreatePost() {
     const initialValues = {
         title:'',
         postText:'',
-        userName:'',
     }
     const onSubmit = async (data) => {
         const resData = await axios.post('http://localhost:3001/posts', data, {headers: {token: sessionStorage.getItem('token')}});
@@ -22,7 +21,6 @@ export default function CreatePost() {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('You must create a title for your post'),
         postText:Yup.string().required(),
-        userName:Yup.string().required().min(3).max(15),
     })
   return (
     <div className='flex w-full h-screen justify-center items-center'>
@@ -36,10 +34,6 @@ export default function CreatePost() {
                     <label htmlFor="postText">Post: </label>
                     <ErrorMessage className='text-red-600' name='postText' component='span'/>
                     <Field className='text-2xl mb-5' name='postText' placeholder='Your post...'/>
-
-                    <label htmlFor="userName">Username: </label>
-                    <ErrorMessage className='text-red-600' name='userName' component='span'/>
-                    <Field className='text-2xl mb-5' name='userName' placeholder= 'your Username...' />
 
                     <button className='bg-blue-300 p-3 my-5 rounded-lg text-2xl font-bold text-white' type='submit'>Create Post</button>
                 </Form>

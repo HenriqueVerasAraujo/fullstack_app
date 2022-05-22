@@ -5,7 +5,8 @@ const { validateToken } = require('../middlewares/validateToken')
 
 router.post('/newComment', validateToken, async(req, res) => {
     const body = req.body
-    await Comments.create(body);
+    const userName = req.user;
+    await Comments.create({...body, userName,});
     res.status(201).send(body);
 });
 

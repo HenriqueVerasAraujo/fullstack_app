@@ -10,8 +10,8 @@ router.get('/', async(_req, res) => {
 
 router.post('/', validateToken, async (req, res) => {
     const post = req.body;
-    console.log(post);
-    await Posts.create(post);
+    const userName = req.user;
+    await Posts.create({...post, userName,});
     return res.status(201).json(post);
 })
 
