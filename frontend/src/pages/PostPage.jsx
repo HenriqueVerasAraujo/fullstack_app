@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import SinglePost from '../components/SinglePost';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import myContext from '../context/myContext';
 
 export default function PostPage() {
     let { id } = useParams();
     const [myPost, setMyPost] = useState({});
     const [myComments, setMyComments] = useState([]);
+    const { userName } = useContext(myContext);
 
     const initialValues = {
       commentText:'',
@@ -28,6 +30,12 @@ export default function PostPage() {
       setMyComments(commentData.data);
     }
 
+    const deleteComment = async(commentId) => {
+     await axios.delete(`http://localhost:3001/comments/${commentId}`, {headers: {token: localStorage.getItem('token')}});
+     console.log('aqui deu');
+     const commentData = await axios.get(`http://localhost:3001/comments/${id}`);
+      setMyComments(commentData.data);
+    }
     const fetchData = async(id) => {
       const postData = await axios.get(`http://localhost:3001/posts/${id}`)
       const commentData = await axios.get(`http://localhost:3001/comments/${id}`)
@@ -58,6 +66,9 @@ export default function PostPage() {
             <div className='w-[50%] border-2 border-blue-300 rounded-lg '>
               <h1 className='text-xl'>Comentário de: {singleComment.userName}</h1>
               <h2 className='px-3 py-3'>{singleComment.commentText}</h2>
+              {userName === singleComment.userName && (
+                <button onClick={() => {deleteComment(singleComment.id)}}>Delete</button>
+                )}
             </div>
           ))}
       </div>
