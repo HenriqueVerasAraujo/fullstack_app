@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import myContext from '../context/myContext';
 
 
 export default function Login() {
     const [renderMessage, setRenderMessage] = useState(false);
     const [loginMessage, setLoginMessage] = useState('');
     const navigate = useNavigate();
+    const {setUserName} = useContext(myContext);
+    
 
     const initialValues = {
         userName:'',
@@ -25,7 +28,9 @@ export default function Login() {
         const submit = await axios.post(`http://localhost:3001/users/login`, data);
         if (!submit.data.error) {
             setLoginMessage(submit.data.message);
-            sessionStorage.setItem("token", submit.data.token);
+            localStorage.setItem("token", submit.data.token);
+            setUserName(data.userName);
+            localStorage.setItem('userName', data.userName);
             navigate('/');
             return setRenderMessage(true);
         }

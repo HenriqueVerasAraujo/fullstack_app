@@ -20,7 +20,7 @@ export default function PostPage() {
 
     const onSubmit = async(data) => {
       const allData = {...data, PostId: id }
-      const resData = await axios.post(`http://localhost:3001/comments/newComment`, allData, {headers: {token: sessionStorage.getItem('token')}});
+      const resData = await axios.post(`http://localhost:3001/comments/newComment`, allData, {headers: {token: localStorage.getItem('token')}});
       if (resData.data.error) {
         alert("Você precisa estar logado para comentar posts!");
       };
@@ -55,7 +55,7 @@ export default function PostPage() {
       <div className='w-[80%] flex flex-col items-center'>
           <h1>Comments:</h1>
           {myComments.map((singleComment) => (
-            <div className='w-[50%] h-[100px] border-2 border-blue-300 rounded-lg '>
+            <div className='w-[50%] border-2 border-blue-300 rounded-lg '>
               <h1 className='text-xl'>Comentário de: {singleComment.userName}</h1>
               <h2 className='px-3 py-3'>{singleComment.commentText}</h2>
             </div>

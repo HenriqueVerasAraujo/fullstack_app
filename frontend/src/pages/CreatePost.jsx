@@ -11,7 +11,7 @@ export default function CreatePost() {
         postText:'',
     }
     const onSubmit = async (data) => {
-        const resData = await axios.post('http://localhost:3001/posts', data, {headers: {token: sessionStorage.getItem('token')}});
+        const resData = await axios.post('http://localhost:3001/posts', data, {headers: {token: localStorage.getItem('token')}});
         if (resData.data.error) {
              return alert('Você precisa estar logado para criar Posts!');
         }
