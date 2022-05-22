@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
     const [renderMessage, setRenderMessage] = useState(false);
     const [loginMessage, setLoginMessage] = useState('');
+    const navigate = useNavigate();
 
     const initialValues = {
         userName:'',
@@ -24,6 +26,7 @@ export default function Login() {
         if (!submit.data.error) {
             setLoginMessage(submit.data.message);
             sessionStorage.setItem("token", submit.data.token);
+            navigate('/');
             return setRenderMessage(true);
         }
         setLoginMessage(submit.data.error);
