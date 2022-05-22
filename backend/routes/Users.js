@@ -18,15 +18,15 @@ router.post('/login', async(req, res) => {
     const { password, userName } = req.body;
     const user = await Users.findOne({where: { userName }});
     if (!user) {
-       return res.status(400).json({message: "Usuário não cadastrado"});
+       return res.json({error: "Usuário não cadastrado"});
     }
     const hashPassword = await bcrypt.hash(password, 10);
     // console.log(hashPassword);
     const verifyPassword = await bcrypt.compare(password, user.password);
     if (!verifyPassword) {
-        return res.status(400).json({message: "Senha invalida"});
+        return res.json({error: "Senha invalida"});
     }
-    return res.status(200).json(user);
+    return res.status(200).json({message: "You are logged in"});
 });
 
 // router.get('/:postId', async (req, res) => {

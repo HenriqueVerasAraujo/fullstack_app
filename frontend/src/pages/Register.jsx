@@ -21,26 +21,28 @@ export default function Register() {
   return (
     <div className='w-full h-[screen - 200px] flex flex-col items-center'>
         <div className='w-[600px] h-[400px] mt-[200px] bg-zinc-300 rounded-lg flex flex-col'>
-        <div className='w-full h-[50px] bg-blue-600 flex items-center justify-center'>
-            <h1 className='text-3xl text-neutral-100 font-bold'>Register</h1>
-        </div>
-        <div className='w-full h-full'>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <div className='px-10'>
-                    <Form>
-                        <label htmlFor="userName">Username: </label>
-                        <ErrorMessage component='span' name='userName'/>
-                        <Field className='mb-5' name='userName'  placeholder="Your Username..."/>
-                        
-                        <label htmlFor="password">Password: </label>
-                        <ErrorMessage component='span' name='password'/>
-                        <Field className='mb-5'type='password' name='password' placeholder="Your Password here..."/>
+            <div className='w-full h-[50px] bg-blue-600 flex items-center justify-center'>
+                <h1 className='text-3xl text-neutral-100 font-bold'>Register</h1>
+            </div>
+            <div className='w-full h-full'>
+                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                    <div className='px-10 flex flex-col  h-full justify-items-end'>
+                        <Form>
+                            <div className='flex flex-col mt-6'>
+                                <label className='text-2xl' htmlFor="userName">Username: </label>
+                                <ErrorMessage component='span' name='userName'/>
+                                <Field className='mb-5' name='userName'  placeholder="Your Username..."/>
+                                
+                                <label className='text-2xl' htmlFor="password">Password: </label>
+                                <ErrorMessage component='span' name='password'/>
+                                <Field className='mb-5'type='password' name='password' placeholder="Your Password here..."/>
+                            </div>
 
-                        <button className='bg-blue-300 w-full h-[50px] text-neutral-50 text-3xl font-bold' type='submit'>Confirm</button>
-                    </Form>
-                </div>
-            </Formik>
-        </div>
+                            <button className='bg-blue-300 w-full h-[50px] mt-10 text-neutral-50 text-3xl font-bold' type='submit'>Confirm</button>
+                        </Form>
+                    </div>
+                </Formik>
+            </div>
         </div>
         <div>
             {renderMessage && (

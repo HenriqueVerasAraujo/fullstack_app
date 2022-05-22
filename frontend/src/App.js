@@ -6,6 +6,8 @@ import CreatePost from './pages/CreatePost';
 import Navbar from './components/Navbar';
 import PostPage from './pages/PostPage';
 import Register from './pages/Register';
+import Login from './pages/Login';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
     <Route exact path="/createPost" element={ <CreatePost /> } />
     <Route exact path="/post/:id" element={ <PostPage /> } />
     <Route exact path="/register" element={ <Register /> } />
+    <Route exact path="/login" element={ <Login /> } />
   </Routes>
  </BrowserRouter>
   );
