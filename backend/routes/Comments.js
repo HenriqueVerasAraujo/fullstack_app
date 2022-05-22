@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { Comments } = require('../models');
+const { validateToken } = require('../middlewares/validateToken')
 
-router.post('/newComment', async(req, res) => {
+router.post('/newComment', validateToken, async(req, res) => {
     const body = req.body
     await Comments.create(body);
     res.status(201).send(body);

@@ -22,7 +22,10 @@ export default function PostPage() {
 
     const onSubmit = async(data) => {
       const allData = {...data, PostId: id }
-      await axios.post(`http://localhost:3001/comments/newComment`, allData);
+      const resData = await axios.post(`http://localhost:3001/comments/newComment`, allData, {headers: {token: sessionStorage.getItem('token')}});
+      if (resData.data.error) {
+        alert("Você precisa estar logado para comentar posts!");
+      };
       const commentData = await axios.get(`http://localhost:3001/comments/${id}`);
       setMyComments(commentData.data);
     }

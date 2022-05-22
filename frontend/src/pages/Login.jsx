@@ -23,7 +23,8 @@ export default function Login() {
         const submit = await axios.post(`http://localhost:3001/users/login`, data);
         if (!submit.data.error) {
             setLoginMessage(submit.data.message);
-            return setRenderMessage(true)
+            sessionStorage.setItem("token", submit.data.token);
+            return setRenderMessage(true);
         }
         setLoginMessage(submit.data.error);
         setRenderMessage(true);
