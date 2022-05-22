@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import Navbar from './components/Navbar';
 import PostPage from './pages/PostPage';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Route exact path="/" element={ <Home /> } />
     <Route exact path="/createPost" element={ <CreatePost /> } />
     <Route exact path="/post/:id" element={ <PostPage /> } />
+    <Route exact path="/register" element={ <Register /> } />
   </Routes>
  </BrowserRouter>
   );
