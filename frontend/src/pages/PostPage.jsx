@@ -23,7 +23,10 @@ export default function PostPage() {
     const onSubmit = async(data) => {
       const allData = {...data, PostId: id }
       await axios.post(`http://localhost:3001/comments/newComment`, allData);
+      const commentData = await axios.get(`http://localhost:3001/comments/${id}`);
+      setMyComments(commentData.data);
     }
+
     const fetchData = async(id) => {
       const postData = await axios.get(`http://localhost:3001/posts/${id}`)
       const commentData = await axios.get(`http://localhost:3001/comments/${id}`)
@@ -32,7 +35,7 @@ export default function PostPage() {
     }
     
     useEffect(() => {
-        fetchData(id);
+      fetchData(id);
     }, [])
 
   return (
@@ -47,20 +50,22 @@ export default function PostPage() {
           index={1}
           />
       </div>
-      {/* Area do  */}
-      <div className=''>
+      {/* Area dos comentarios  */}
+      <div className='w-[80%] flex flex-col items-center'>
           <h1>Comments:</h1>
           {myComments.map((singleComment) => (
-            <div>
-              <h1>{singleComment.userName}</h1>
-              <h2>{singleComment.commentText}</h2>
+            <div className='w-[50%] h-[100px] border-2 border-blue-300 rounded-lg '>
+              <h1 className='text-xl'>Comentário de: {singleComment.userName}</h1>
+              <h2 className='px-3 py-3'>{singleComment.commentText}</h2>
             </div>
           ))}
       </div>
-      <div className='my-6'>
+      {/* Area de criar comentarios  */}
+      <div className='my-6 border-2 border-blue-300 rounded-lg w-[80%]'>
         <h1>Create a Comment:</h1>
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-          <Form className='flex flex-col my-3'>
+          <Form className='flex flex-col mt-3'>
+
             <label htmlFor="userName">Username: </label>
             <ErrorMessage component='span' name='userName'/>
             <Field className='mb-5' name='userName'  placeholder="Your Username..."/>
@@ -68,7 +73,9 @@ export default function PostPage() {
             <label htmlFor="commentText">Comment: </label>
             <ErrorMessage component='span' name='commentText'/>
             <Field className='mb-5' name='commentText' placeholder="Your Comment here..."/>
-            <button type='submit'>Send Comment</button>
+
+            <button className='bg-blue-300 h-[50px] text-neutral-50 text-3xl font-bold' type='submit'>Send Comment</button>
+
           </Form>
         </Formik>
       </div>
