@@ -10,6 +10,7 @@ const validateToken = async (req, res, next) => {
     try {
         const validToken = verify(token, 'secretkey');
         if (validToken) {
+            req.user = validToken.userName;
             return next();
         }
     } catch (err) {

@@ -12,11 +12,9 @@ export default function PostPage() {
 
     const initialValues = {
       commentText:'',
-      userName:'',
     };
 
     const validationSchema = Yup.object().shape({
-      userName:Yup.string().required('Your Username is required').min(3).max(15),
       commentText:Yup.string().required(),
   })
 
@@ -68,10 +66,6 @@ export default function PostPage() {
         <h1>Create a Comment:</h1>
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           <Form className='flex flex-col mt-3'>
-
-            <label htmlFor="userName">Username: </label>
-            <ErrorMessage component='span' name='userName'/>
-            <Field className='mb-5' name='userName'  placeholder="Your Username..."/>
             
             <label htmlFor="commentText">Comment: </label>
             <ErrorMessage component='span' name='commentText'/>
