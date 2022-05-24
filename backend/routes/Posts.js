@@ -5,22 +5,23 @@ const { validateToken } = require('../middlewares/validateToken');
 
 router.get('/', async(_req, res) => {
     const allPosts =  await Posts.findAll();
-    return res.status(200).json(allPosts);
+    return res.json(allPosts);
 })
 
 router.post('/', validateToken, async (req, res) => {
     const post = req.body;
-    const userName = req.user;
-    await Posts.create({...post, userName,});
-    return res.status(201).json(post);
-})
+    const{ userName, id } = req.user;
+    const resBody = {...post, userName, UserId: id }
+    await Posts.create(resBody);
+    return res.json(resBody);
+});
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     console.log(id);
     const singlePost = await Posts.findByPk(id);
     if(singlePost) {
-        return res.status(200).json(singlePost);
+        return res.json(singlePost);
     }
 });
 

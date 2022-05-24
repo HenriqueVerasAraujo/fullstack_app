@@ -15,5 +15,6 @@ app.use('/comments', commentsRouter);
 app.use('/users', usersRouter);
 
 db.sequelize.sync().then(() => {
-    app.listen(3001, () => console.log('server running on port 3001'));
+    app.listen(3001, () => {console.log('server running on port 3001');
+console.log('0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')});
 });
