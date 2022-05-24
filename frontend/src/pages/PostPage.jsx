@@ -38,7 +38,6 @@ export default function PostPage() {
     }
     const fetchData = async(id) => {
       const postData = await axios.get(`http://localhost:3001/posts/${id}`)
-      console.log(postData);
       const commentData = await axios.get(`http://localhost:3001/comments/${id}`)
       setMyPost(postData.data);
       setMyComments(commentData.data);
@@ -58,6 +57,7 @@ export default function PostPage() {
           text={myPost.postText}
           userName={myPost.userName}
           index={1}
+          likes={myPost.Likes}
           />
       </div>
       {/* Area dos comentarios  */}

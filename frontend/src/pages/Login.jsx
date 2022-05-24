@@ -28,7 +28,8 @@ export default function Login() {
         const submit = await axios.post(`http://localhost:3001/users/login`, data);
         if (!submit.data.error) {
             setLoginMessage(submit.data.message);
-            localStorage.setItem("token", submit.data.token);
+            localStorage.setItem("token", submit.data.token)
+            localStorage.setItem("id", submit.data.id);
             setUserName(data.userName);
             localStorage.setItem('userName', data.userName);
             navigate('/');

@@ -28,7 +28,7 @@ router.post('/login', async(req, res) => {
         return res.json({error: "Senha invalida"});
     }
     const token = sign({userName: user.userName, id: user.id}, 'secretkey');
-    return res.status(200).json({message: "You are logged in", token,});
+    return res.status(200).json({message: "You are logged in", token, id: user.id});
 });
 
 // router.get('/:postId', async (req, res) => {
