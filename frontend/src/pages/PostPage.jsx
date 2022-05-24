@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
-import SinglePost from '../components/SinglePost';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import myContext from '../context/myContext';
@@ -34,7 +33,7 @@ export default function PostPage() {
      await axios.delete(`http://localhost:3001/comments/${commentId}`, {headers: {token: localStorage.getItem('token')}});
      console.log('aqui deu');
      const commentData = await axios.get(`http://localhost:3001/comments/${id}`);
-      setMyComments(commentData.data);
+     setMyComments(commentData.data);
     }
     const fetchData = async(id) => {
       const postData = await axios.get(`http://localhost:3001/posts/${id}`)
@@ -50,15 +49,16 @@ export default function PostPage() {
   return (
     <div className='flex flex-col items-center justify-center pt-10'>
       {/* // Area do post: */}
-      <div className='w-full flex justify-center '>
-        <SinglePost
-          id={myPost.id}
-          title={myPost.title}
-          text={myPost.postText}
-          userName={myPost.userName}
-          index={1}
-          likes={myPost.Likes}
-          />
+      <div className='w-[60%] h-[300px] bg-red-600 mb-10 rounded-xl flex flex-col justify-between'>
+        <div className='w-full h-[50px] flex justify-center items-center bg-sky-300 rounded-t-xl'>
+          <h1 className='text-4xl font-bold'>{myPost.title}</h1>
+        </div>
+        <div className='w-full h-full bg-zinc-100 px-10 py-6'>
+          <h1 className='text-3xl'>{myPost.postText}</h1>
+        </div>
+        <div className='w-full h-[50px] flex justify-end items-center px-10 bg-sky-300 rounded-b-xl'>
+          <h1 className='text-2xl font-bold'>{myPost.userName}</h1>
+        </div>
       </div>
       {/* Area dos comentarios  */}
       <div className='w-[80%] flex flex-col items-center'>

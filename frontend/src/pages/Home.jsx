@@ -28,7 +28,6 @@ export default function Home() {
          likes={singlePost.Likes}
          />
        ))}
-       <div className=''>{myNumber}</div>
      </div>
    );
 }

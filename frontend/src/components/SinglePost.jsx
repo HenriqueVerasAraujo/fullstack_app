@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import myContext from '../context/myContext';
+import { ThumbUpIcon } from '@heroicons/react/outline';
+import { ThumbUpIcon as ThumbFull } from '@heroicons/react/solid';
+
 
 export default function SinglePost({ title, text, userName, index, id, likes }) {
   let navigate = useNavigate();
@@ -50,26 +52,28 @@ export default function SinglePost({ title, text, userName, index, id, likes }) 
   }
   return (
     <div>
-      <div className='flex justify-between'>
-        <button onClick={likeFunction}>Like</button>
-        <h3>{numOfLikes}</h3>
-      </div>
-      <div onClick={redirectToPost} key={index} className='hover:cursor-pointer w-[400px] h-[400px] bg-zinc-100 border-2 border-blue-300  mb-10 rounded-xl flex flex-col justify-between'>
-          <div className='flex justify-center items-center w-full h-[50px] bg-sky-300 text-2xl font-bold rounded-t-xl'>
-              <h1 className='text-black'>{title}</h1>
+      <div key={index} className='hover:cursor-pointer w-[400px] h-[400px] bg-zinc-100 border-2 border-blue-300  mb-10 rounded-xl flex flex-col justify-between'>
+          <div className='flex justify-between items-center w-full h-[50px] bg-sky-300  font-bold rounded-t-xl px-5'>
+              <h1 className='text-black font-bold text-2xl'>{title}</h1>
+              <div className='flex '>
+              <button onClick={likeFunction}>{
+                runFunction ? (
+                  <ThumbFull className='w-6 mr-3' />
+                  ) : (
+                    <ThumbUpIcon className='w-6 mr-3' />
+                )}
+              </button>
+                <h3>{numOfLikes}</h3>
+              </div>
           </div>
-          <div className='h-[300px] w-full'>
+          <div onClick={redirectToPost} className='h-[300px] w-full'>
               <h2 className='pt-6 px-6'>{text}</h2>
           </div>
           <div className='flex justify-end items-center w-full h-[50px] bg-sky-300 text-1xl font-bold rounded-b-xl'>
               <h3 className='pr-5'>{userName}</h3>
           </div>
       </div>
-      {runFunction ? (
-        <h1>LIKED</h1>
-      ) : (
-        <h1>NOT LIKED</h1> 
-      )}
+      
     </div>
   )
 }
